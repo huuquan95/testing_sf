@@ -22,6 +22,18 @@ jobs:
               with:
                 fetch-depth: 0
 
+            - name: 'cache sf and delta package'
+              id: cache-sf
+              uses: actions/cache@v3
+              # env:
+              #   cache-name: cache-node-modules
+              with:
+                path: |
+                  ~/sf
+                  ~/.sf
+                key: cache-sf
+                restore-keys: cache-sf
+
             - name: 'Read PR Body'
               env:
                 # The pull request body is available through the github context object
@@ -45,6 +57,8 @@ jobs:
                   
             # Install Salesforce CLI
             - name: 'Install Salesforce CLI'
+              if: ${{ steps.cache-sf.outputs.cache-hit != 'true' }}
+              continue-on-error: true
               run: |
                   wget https://developer.salesforce.com/media/salesforce-cli/sf/channels/stable/sf-linux-x64.tar.xz
                   mkdir ~/sf
@@ -54,6 +68,8 @@ jobs:
 
             # install SFDX-Git-Delta plugin - https://github.com/scolladon/sfdx-git-delta
             - name: 'Installing sfdx git delta'
+              if: ${{ steps.cache-sf.outputs.cache-hit != 'true' }}
+              continue-on-error: true
               run: | 
                   echo y | sf plugins install sfdx-git-delta
                   sf plugins
