@@ -57,8 +57,8 @@ jobs:
                   
             # Install Salesforce CLI
             - name: 'Install Salesforce CLI'
-              if: ${{ steps.cache-sf.outputs.cache-hit != 'true' }}
-              continue-on-error: true
+              # if: ${{ steps.cache-sf.outputs.cache-hit != 'true' }}
+              # continue-on-error: true
               run: |
                   wget https://developer.salesforce.com/media/salesforce-cli/sf/channels/stable/sf-linux-x64.tar.xz
                   mkdir ~/sf
