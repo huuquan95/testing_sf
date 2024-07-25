@@ -29,6 +29,8 @@ jobs:
               #   cache-name: cache-node-modules
               with:
                 path: |
+                  ~/.sfdx
+                  ~/.sfdx/plugins
                   ~/.npm
                   ~/.sf
                   node_modules
