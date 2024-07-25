@@ -29,8 +29,9 @@ jobs:
               #   cache-name: cache-node-modules
               with:
                 path: |
-                  ~/sf
+                  ~/.npm
                   ~/.sf
+                  node_modules
                 key: cache-sf
                 restore-keys: cache-sf
 
